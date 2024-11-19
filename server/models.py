@@ -16,7 +16,7 @@ class User(db.Model, SerializerMixin):
 
     animals = db.relationship("Animal", back_populates = 'user')
     enclosures  = db.relationship("Enclosure", back_populates = 'user')
-    achievements = db.relationship("Achievement", back_populates = "users")
+    completes = db.relationship("Complete", back_populates = "user")
 
     def  __repr__(self):
         return f'[User: {self.username}, pass: {self.password} cash: {self.cash}]'
@@ -82,7 +82,26 @@ class Achievement(db.Model, SerializerMixin):
     description = db.Column(db.String)
     reward = db.Column(db.Integer)
 
-    users = db.relationship('User', back_populates = 'achievements')
+    completes = db.relationship('Complete', back_populates = 'achievement')
 
     def __repr__(self):
         return f'[{self.name}: {self.description} reward: {self.reward}]'
+    
+
+#==========================================================================
+
+
+class Complete(db.Model, SerializerMixin):
+    __tablename__ = 'completes'
+
+    serialize_rules = ('-user.completes', '-achievement.completes')
+
+    id = db.Column(db.Integer, primary_key = True)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship('User', back_populates = 'completes')
+    achievement_id = db.Column(db.Integer, db.ForeignKey('achievements.id'))
+    achievement = db.relationship('Achievement', back_populates = 'completes')
+
+    def __rept__(self):
+        return f'[{self.user.username} has completed {self.achievement.name}]'
