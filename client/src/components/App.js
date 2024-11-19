@@ -2,7 +2,19 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 
 function App() {
-  return <h1>Project Client</h1>;
-}
+
+  const [user,setUser] = useState({})
+
+  useEffect(() => {
+    fetch('/check_session')
+    .then(r => r.json())
+    .then(data => setUser(data))
+    },[])
+
+  return( 
+  <div>
+    <p>{user.username}</p>
+  </div>
+)}
 
 export default App;
