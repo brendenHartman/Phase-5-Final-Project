@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const cashSlice = createSlice({
     name: 'cash',
-    initialState: {cash: 1000},
-    reducer: {
+    initialState: 1000,
+    reducers: {
         addBy(state,action){
             state.cash += action.payload
         },

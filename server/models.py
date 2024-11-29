@@ -57,7 +57,6 @@ class Enclosure(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key = True)
     type = db.Column(db.String)
     price =  db.Column(db.Integer)
-    income = db.Column(db.Integer)
     num_animals = db.Column(db.Integer)
     purchased = db.Column(db.Boolean)
 
