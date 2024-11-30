@@ -27,7 +27,7 @@ function App() {
     },[])
 
   return( 
-  <div>
+  <>
     <Switch>
       <Route exact path='/'>
         <MainMenu></MainMenu>
@@ -45,7 +45,7 @@ function App() {
         <Tutorial></Tutorial>
       </Route>
     </Switch>
-  </div>
+  </>
 )}
 
 export default App;

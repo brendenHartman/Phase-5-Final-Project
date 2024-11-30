@@ -25,7 +25,7 @@ if __name__ == '__main__':
         items.append(brenden)
         rabbitEnclosure = Enclosure(type='rabbit',price=0,num_animals=0,purchased=False,user=brenden)
         items.append(rabbitEnclosure)
-        pigEnclosure = Enclosure(type='pig',price=500,num_animals=0,purchased=True,user=brenden)
+        pigEnclosure = Enclosure(type='pig',price=500,num_animals=0,purchased=False,user=brenden)
         items.append(pigEnclosure)
         db.session.add_all(items)
         db.session.commit()

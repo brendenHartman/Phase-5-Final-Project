@@ -5,10 +5,10 @@ const cashSlice = createSlice({
     initialState: 1000,
     reducers: {
         addBy(state,action){
-            state.cash += action.payload
+            return state += action.payload
         },
         subtractBy(state,action){
-            state.cash -= action.payload
+            return state -= action.payload
         }
     }
 })
