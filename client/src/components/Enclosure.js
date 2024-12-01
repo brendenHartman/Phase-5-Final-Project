@@ -16,7 +16,21 @@ function Enclosure({enclosure}){
     if(enclosure.purchased === true){
         enclosureBody = (
             <div id='enclosureBodyPurchased'>
-                <h1>Bought! Thanks!</h1>
+                <h1>{enclosure.type.toUpperCase()}!!</h1>
+                <div id='animalGrid'>
+                    <div className="animalHolder">
+                        
+                    </div>
+                    <div className="animalHolder">
+                        
+                    </div>
+                    <div className="animalHolder">
+                    
+                    </div>
+                    <div className="animalHolder">
+                    
+                    </div>
+                </div>
             </div>
         )
     }

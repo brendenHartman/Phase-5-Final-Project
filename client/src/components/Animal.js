@@ -1,8 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
 
 function Animal(){
+    const animal = {}
+    
     return(
-        <div>
+        <div id={animal.id} className="animal">
 
         </div>
     )

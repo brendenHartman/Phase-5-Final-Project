@@ -5,14 +5,14 @@ const animalSlice = createSlice({
     initialState: [],
     reducers: {
         addAnimal(state,action){
-            state.animals.append(action.payload)
+            return state.append(action.payload)
         },
         removeAnimal(state,action){
             const animalName = action.payload.name
-            state.animals.filter((animal) => animal.name != animalName)
+            return state.filter((animal) => animal.name != animalName)
         },
         setAnimals(state,action){
-            state.animal = action.payload
+            return action.payload
         }
     }
 })
