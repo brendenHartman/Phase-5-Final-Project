@@ -33,9 +33,8 @@ class Animal(db.Model,SerializerMixin):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
     type = db.Column(db.String)
-    gender  = db.Column(db.String)
     price = db.Column(db.Integer)
-
+    
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship('User', back_populates = 'animals')
 
@@ -59,6 +58,7 @@ class Enclosure(db.Model, SerializerMixin):
     price =  db.Column(db.Integer)
     num_animals = db.Column(db.Integer)
     purchased = db.Column(db.Boolean)
+    animal_price = db.Column(db.Integer)
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship('User', back_populates = 'enclosures')

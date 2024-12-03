@@ -2,14 +2,31 @@ import { useSelector, useDispatch } from "react-redux";
 import Animal from "./Animal";
 import { buyEnclosure } from "../slices/enclosuresSlice";
 import { subtractBy } from "../slices/cashSlice";
-
+import { addAnimals } from "../slices/animalSlice";
 
 function Enclosure({enclosure}){
     const dispatch = useDispatch()
+    console.log(enclosure.user_id,enclosure.animal_price,enclosure.type,enclosure.id)
+    function onEnclosure(){
+        dispatch(buyEnclosure(enclosure.type));
+        dispatch(subtractBy(enclosure.price));
+        fetch('/animals',{
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                type: enclosure.type,
+                userId: enclosure.user_id,
+                enclosureId: enclosure.id,
+                price: enclosure.animal_price
+            })
+        })
+        .then(r => r.json())
+        .then(data => dispatch(addAnimals(data)))
+    }
 
     let enclosureBody = (
         <div id='enclosureBodyUnpurchased'>
-            <button onClick={() => {dispatch(buyEnclosure(enclosure.type));dispatch(subtractBy(enclosure.price))}}>Purchase: ${enclosure.price}</button>
+            <button onClick={onEnclosure}>Purchase: ${enclosure.price}</button>
         </div>
     )
 

@@ -23,9 +23,9 @@ if __name__ == '__main__':
         items = []
         brenden = User(username='brendenHart', password='Hartman123', cash=1000)
         items.append(brenden)
-        rabbitEnclosure = Enclosure(type='rabbit',price=0,num_animals=0,purchased=False,user=brenden)
+        rabbitEnclosure = Enclosure(type='rabbit',price=0,num_animals=0,purchased=False,user=brenden,animal_price=100)
         items.append(rabbitEnclosure)
-        pigEnclosure = Enclosure(type='pig',price=500,num_animals=0,purchased=False,user=brenden)
+        pigEnclosure = Enclosure(type='pig',price=500,num_animals=0,purchased=False,user=brenden,animal_price=500)
         items.append(pigEnclosure)
         db.session.add_all(items)
         db.session.commit()

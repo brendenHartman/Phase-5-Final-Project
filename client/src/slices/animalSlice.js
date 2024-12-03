@@ -7,6 +7,9 @@ const animalSlice = createSlice({
         addAnimal(state,action){
             return state.append(action.payload)
         },
+        addAnimals(state,action){
+            return state.concat(action.payload)
+        },
         removeAnimal(state,action){
             const animalName = action.payload.name
             return state.filter((animal) => animal.name != animalName)
@@ -17,5 +20,5 @@ const animalSlice = createSlice({
     }
 })
 
-export const {addAnimal, removeAnimal} = animalSlice.actions;
+export const {addAnimal, removeAnimal, addAnimals} = animalSlice.actions;
 export default animalSlice.reducer;
