@@ -45,7 +45,7 @@ class Animals(Resource):
         animal4 = Animal(name='',type=type,price=price,enclosure=enclosure,user=user)
         animals.append(animal4)
         db.session.add_all(animals)
-        db.session.commit
+        db.session.commit()
         animalsDict = [animal.to_dict() for animal in animals]
         return animalsDict, 200
 

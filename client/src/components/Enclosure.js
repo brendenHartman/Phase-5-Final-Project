@@ -6,7 +6,7 @@ import { addAnimals } from "../slices/animalSlice";
 
 function Enclosure({enclosure}){
     const dispatch = useDispatch()
-    console.log(enclosure.user_id,enclosure.animal_price,enclosure.type,enclosure.id)
+
     function onEnclosure(){
         dispatch(buyEnclosure(enclosure.type));
         dispatch(subtractBy(enclosure.price));
@@ -24,6 +24,9 @@ function Enclosure({enclosure}){
         .then(data => dispatch(addAnimals(data)))
     }
 
+    const animals = useSelector((state) => state.animals)
+    const animalSec = animals.filter((animal) => animal.type === enclosure.type)
+    
     let enclosureBody = (
         <div id='enclosureBodyUnpurchased'>
             <button onClick={onEnclosure}>Purchase: ${enclosure.price}</button>
@@ -35,18 +38,7 @@ function Enclosure({enclosure}){
             <div id='enclosureBodyPurchased'>
                 <h1>{enclosure.type.toUpperCase()}!!</h1>
                 <div id='animalGrid'>
-                    <div className="animalHolder">
-                        
-                    </div>
-                    <div className="animalHolder">
-                        
-                    </div>
-                    <div className="animalHolder">
-                    
-                    </div>
-                    <div className="animalHolder">
-                    
-                    </div>
+                    {animalSec.map((ani) => <Animal key={ani.id} animal={ani}></Animal>)}
                 </div>
             </div>
         )

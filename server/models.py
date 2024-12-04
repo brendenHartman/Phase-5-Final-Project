@@ -7,7 +7,7 @@ from config import db
 class User(db.Model, SerializerMixin):
     __tablename__ =  'users'
 
-    serialize_rules =  ('-achievements.user', '-animals.user', '-enclosures.user')
+    serialize_rules =  ('-completes.user', '-animals.user', '-enclosures.user')
 
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String)
@@ -28,7 +28,7 @@ class User(db.Model, SerializerMixin):
 class Animal(db.Model,SerializerMixin):
     __tablename__ = 'animals'
 
-    serialize_rules = ('-user.animals', '-enclosure.animals')
+    serialize_rules = ('-user.animals', '-enclosure.animals', '-user.enclosures')
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
@@ -42,8 +42,7 @@ class Animal(db.Model,SerializerMixin):
     enclosure  = db.relationship('Enclosure', back_populates = "animals")
 
     def __repr__(self):
-        return f'[{self.type} {self.id}: {self.name}  {self.gender}]'
-    
+        return f'[{self.type} {self.id}: {self.name}]'
 
 #==========================================================================
 
@@ -51,7 +50,7 @@ class Animal(db.Model,SerializerMixin):
 class Enclosure(db.Model, SerializerMixin):
     __tablename__ = 'enclosures'
 
-    serialize_rules = ('-animals.enclosure', '-user.enclosures')
+    serialize_rules = ('-animals.enclosure', '-user.enclosures', '-user.animals')
 
     id = db.Column(db.Integer, primary_key = True)
     type = db.Column(db.String)
@@ -74,7 +73,7 @@ class Enclosure(db.Model, SerializerMixin):
 class Achievement(db.Model, SerializerMixin):
     __tablename__ = 'achievements'
 
-    serialize_rules = ('-user.achievements')
+    serialize_rules = ('-complete.achievement')
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
