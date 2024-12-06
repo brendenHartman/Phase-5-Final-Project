@@ -1,7 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
+import { updateCashAsync } from "../slices/cashSlice";
+import { useEffect } from "react";
 
 function Animal({animal}){
-    
+
     return(
         <div id={animal.id} className="animal">
             <h1>{animal.type}</h1>

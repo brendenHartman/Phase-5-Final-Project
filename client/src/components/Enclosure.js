@@ -3,11 +3,12 @@ import Animal from "./Animal";
 import { buyEnclosure } from "../slices/enclosuresSlice";
 import { subtractBy } from "../slices/cashSlice";
 import { addAnimals } from "../slices/animalSlice";
+import CashCollector from "./CashCollector";
 
 function Enclosure({enclosure}){
     const dispatch = useDispatch()
     const cash = useSelector(state => state.cash)
-    const user = enclosure.user
+    const user = useSelector(state => state.user)
 
     function onEnclosure(){
         dispatch(buyEnclosure(enclosure.type));
@@ -60,6 +61,7 @@ function Enclosure({enclosure}){
                 <h1>{enclosure.type.toUpperCase()}!!</h1>
                 <div id='animalGrid'>
                     {animalSec.map((ani) => <Animal key={ani.id} animal={ani}></Animal>)}
+                    <CashCollector amount={500} interval={5000} ></CashCollector>
                 </div>
             </div>
         )
