@@ -12,7 +12,7 @@ const animalSlice = createSlice({
         },
         removeAnimal(state,action){
             const animalName = action.payload.name
-            return state.filter((animal) => animal.name != animalName)
+            return state.filter((animal) => animal.name !== animalName)
         },
         setAnimals(state,action){
             return action.payload
@@ -20,5 +20,5 @@ const animalSlice = createSlice({
     }
 })
 
-export const {addAnimal, removeAnimal, addAnimals} = animalSlice.actions;
+export const {addAnimal, removeAnimal, addAnimals, setAnimals} = animalSlice.actions;
 export default animalSlice.reducer;

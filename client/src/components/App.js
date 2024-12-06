@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import { setUser } from '../slices/userSlice';
 import { setEnclosures } from "../slices/enclosuresSlice";
+import { setAnimals } from "../slices/animalSlice";
 import { Formik } from 'formik';
 import Zoo from "./Zoo";
 import MainMenu from "./MainMenu";
@@ -20,10 +21,10 @@ function App() {
     .then(data => dispatch(setUser(data)))
     fetch('/enclosures')
     .then(r => r.json())
-    .then(data => {
-      dispatch(setEnclosures(data))
-      console.log(data)
-    })
+    .then(data => dispatch(setEnclosures(data)))
+    fetch('/animals')
+    .then(r => r.json())
+    .then(data => dispatch(setAnimals(data)))
     },[])
 
   return( 

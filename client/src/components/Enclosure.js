@@ -6,10 +6,31 @@ import { addAnimals } from "../slices/animalSlice";
 
 function Enclosure({enclosure}){
     const dispatch = useDispatch()
+    const cash = useSelector(state => state.cash)
+    const user = enclosure.user
 
     function onEnclosure(){
         dispatch(buyEnclosure(enclosure.type));
         dispatch(subtractBy(enclosure.price));
+        fetch('/users', {
+            method: 'PATCH',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                userId: user.id,
+                cash: cash
+            })
+        })
+        .then(r => r.json())
+        .then(data => console.log(data))
+        fetch('/enclosures',{
+            method: 'PATCH',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                enclosureId: enclosure.id
+            })
+        })
+        .then(r => r.json())
+        .then(data => console.log(data))
         fetch('/animals',{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},

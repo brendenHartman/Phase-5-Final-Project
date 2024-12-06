@@ -18,16 +18,34 @@ class Check_Session(Resource):
     def get(self):
         user = User.query.first()
         return user.to_dict(), 200
+    
+class Users(Resource):
+    def patch(self):
+        userId = request.get_json()['userId']
+        cash = request.get_json()['cash']
+        user = User.query.filter_by(id=userId).first()
+        user.cash = cash
+        db.session.commit()
+        return user.to_dict(), 200
 
 class Enclosures(Resource):
     def get(self):
         enclosures = Enclosure.query.all()
         enclosuresDict = [enclosure.to_dict() for enclosure in enclosures]
         return enclosuresDict, 200
+    def patch(self):
+        enclosureId = request.get_json()['enclosureId']
+        enclosure = Enclosure.query.filter_by(id=enclosureId).first()
+        enclosure.purchased = True
+        db.session.commit()
+        return enclosure.to_dict(), 201
 
 class Animals(Resource):
+    def get(self):
+        animals = Animal.query.all()
+        animalsDict = [animal.to_dict() for animal in animals]
+        return animalsDict, 200
     def post(self):
-        
         user = User
         type = request.get_json()['type']
         price = request.get_json()['price']
@@ -52,5 +70,6 @@ class Animals(Resource):
 api.add_resource(Check_Session, '/check_session', endpoint='check_session')
 api.add_resource(Enclosures, '/enclosures', endpoint='enclosures')
 api.add_resource(Animals, '/animals', endpoint='animals')
+api.add_resource(Users, '/users', endpoint='users')
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
