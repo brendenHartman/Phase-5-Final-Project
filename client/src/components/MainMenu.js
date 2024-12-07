@@ -1,8 +1,24 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import { setUser } from '../slices/userSlice';
+import { setEnclosures } from "../slices/enclosuresSlice";
+import { setAnimals } from "../slices/animalSlice";
 function MainMenu(){
-
+    const dispatch = useDispatch()
+    useEffect(() => {
+        fetch('/check_session')
+        .then(res => {
+          if(res.ok){
+            return res.json()
+          }
+        })
+        .then(data  => {if(data){
+          dispatch(setUser(data))
+          dispatch(setEnclosures(data.enclosures))
+          dispatch(setAnimals(data.animals))
+        }})
+        },[])
     const user = useSelector((state) => state.user)
     let userSec = 
     (<div id='userSec'>
@@ -13,7 +29,7 @@ function MainMenu(){
 
     let playButton = <Link to='/Login'>Play</Link>
 
-    if(user != {}){
+    if('id' in user){
       userSec = <h1>Welcome, {user.username}!</h1>
       playButton = <Link to='/Zoo'>Play</Link>
     }
