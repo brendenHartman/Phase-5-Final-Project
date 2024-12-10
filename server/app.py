@@ -3,7 +3,7 @@ from flask import request, session
 from flask_restful import Resource
 from config import app, db, api
 from models import User, Animal, Enclosure, Achievement, Complete
-    
+
 class CheckSession(Resource):
     def get(self):
         if session['user_id']:
@@ -21,7 +21,38 @@ class Users(Resource):
         db.session.commit()
         return user.to_dict(), 200
     def post(self):
-        pass
+        username = request.get_json()['username']
+        userExist = User.query.filter_by(username=username).first()
+        if userExist:
+            return {'error': 'username in use'}, 401
+        else: 
+            user = User(
+                username=request.get_json()['username'],
+                password=request.get_json()['password'],
+                cash=1000,
+            )
+            enclosureStarterPackage = []
+            enc1=Enclosure(type='rabbit',price=0,num_animals=0,purchased=False,animal_price=250,user=user)
+            enclosureStarterPackage.append(enc1)
+            enc2=Enclosure(type='pig',price=500,num_animals=0,purchased=False,animal_price=500,user=user)
+            enclosureStarterPackage.append(enc2)
+            enc3=Enclosure(type='penguin',price=1000,num_animals=0,purchased=False,animal_price=1000,user=user)
+            enclosureStarterPackage.append(enc3)
+            enc4=Enclosure(type='parrot',price=2000,num_animals=0,purchased=False,animal_price=2000,user=user)
+            enclosureStarterPackage.append(enc4)
+            enc5=Enclosure(type='bear',price=4000,num_animals=0,purchased=False,animal_price=4000,user=user)
+            enclosureStarterPackage.append(enc5)
+            enc6=Enclosure(type='panther',price=8000,num_animals=0,purchased=False,animal_price=8000,user=user)
+            enclosureStarterPackage.append(enc6)
+            enc7=Enclosure(type='ostrich',price=16000,num_animals=0,purchased=False,animal_price=16000,user=user)
+            enclosureStarterPackage.append(enc7)
+            enc8=Enclosure(type='lion',price=32000,num_animals=0,purchased=False,animal_price=32000,user=user)
+            enclosureStarterPackage.append(enc8)
+            db.session.add_all(enclosureStarterPackage)
+            db.session.add(user)
+            db.session.commit()
+            session['user_id'] = user.id
+            return user.to_dict(), 201
 
 class Login(Resource):
     def post(self):
