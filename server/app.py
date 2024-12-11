@@ -6,7 +6,8 @@ from models import User, Animal, Enclosure, Achievement, Complete
 
 class CheckSession(Resource):
     def get(self):
-        if session['user_id']:
+        if session.get('user_id'):
+            print(session)
             user = User.query.filter_by(id = session['user_id']).first()
             return user.to_dict(), 200
         else:
@@ -89,18 +90,24 @@ class Animals(Resource):
         userId = request.get_json()['userId']
         user  = User.query.filter_by(id=userId).first()
         animals = []
-        animal1 = Animal(name='',type=type,price=price,enclosure=enclosure,user=user)
+        animal1 = Animal(name='',type=type,price=price,enclosure=enclosure,user=user,purchased=False)
         animals.append(animal1)
-        animal2 = Animal(name='',type=type,price=price,enclosure=enclosure,user=user)
+        animal2 = Animal(name='',type=type,price=price,enclosure=enclosure,user=user,purchased=False)
         animals.append(animal2)
-        animal3 = Animal(name='',type=type,price=price,enclosure=enclosure,user=user)
+        animal3 = Animal(name='',type=type,price=price,enclosure=enclosure,user=user,purchased=False)
         animals.append(animal3)
-        animal4 = Animal(name='',type=type,price=price,enclosure=enclosure,user=user)
+        animal4 = Animal(name='',type=type,price=price,enclosure=enclosure,user=user,purchased=False)
         animals.append(animal4)
         db.session.add_all(animals)
         db.session.commit()
         animalsDict = [animal.to_dict() for animal in animals]
         return animalsDict, 200
+    def patch(self):
+        animalId = request.get_json()['animalId']
+        animal = Animal.query.filter_by(id=animalId).first()
+        animal.purchased  = True
+        db.session.commit()
+        return animal.to_dict(), 200
 
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Enclosures, '/enclosures', endpoint='enclosures')

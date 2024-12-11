@@ -16,9 +16,18 @@ const animalSlice = createSlice({
         },
         setAnimals(state,action){
             return action.payload
+        },
+        buyAnimal(state, action) {
+            const id = action.payload;
+            return state.map(animal => {
+                if (animal.id === id) {
+                    return { ...animal, purchased: true };
+                }
+                return animal;
+            });
         }
     }
 })
 
-export const {addAnimal, removeAnimal, addAnimals, setAnimals} = animalSlice.actions;
+export const {addAnimal, removeAnimal, addAnimals, setAnimals, buyAnimal} = animalSlice.actions;
 export default animalSlice.reducer;

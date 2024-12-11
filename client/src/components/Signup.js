@@ -1,5 +1,7 @@
 import { Link, useHistory } from "react-router-dom";
 import { useFormik } from "formik";
+import * as yup from 'yup';
+import { setUser } from "../slices/userSlice";
 import { useDispatch } from "react-redux";
 
 function Signup(){

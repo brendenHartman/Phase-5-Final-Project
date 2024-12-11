@@ -33,6 +33,7 @@ class Animal(db.Model,SerializerMixin):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
     type = db.Column(db.String)
+    purchased = db.Column(db.Boolean)
     price = db.Column(db.Integer)
     
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))

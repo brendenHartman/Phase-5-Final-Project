@@ -1,8 +1,8 @@
 import { Link, useHistory} from "react-router-dom";
 import { useFormik } from 'formik';
+import * as yup from 'yup';
 import { useDispatch } from "react-redux";
 import { setUser } from "../slices/userSlice";
-import * as yup from 'yup';
 
 function Login(){
     const dispatch = useDispatch()
