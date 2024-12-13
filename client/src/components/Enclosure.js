@@ -56,12 +56,39 @@ function Enclosure({enclosure}){
     )
 
     if(enclosure.purchased === true){
+        let speed  = 0
+        let income =  0
+        let collector = (
+            <div>
+                <h1>Purchase animals to start making money!</h1>
+            </div>
+        )
+        if(enclosure.num_animals===1){
+            speed = 10000
+            income = 250
+            collector =(<CashCollector amount={income} interval={speed} ></CashCollector>)
+        }
+        if(enclosure.num_animals===2){
+            speed = 9000
+            income = 300
+            collector =(<CashCollector amount={income} interval={speed} ></CashCollector>)
+        }
+        if(enclosure.num_animals===3){
+            speed = 8000
+            income = 400
+            collector =(<CashCollector amount={income} interval={speed} ></CashCollector>)
+        }
+        if(enclosure.num_animals===4){
+            speed = 5000
+            income = 500
+            collector =(<CashCollector amount={income} interval={speed} ></CashCollector>)
+        }
         enclosureBody = (
             <div id='enclosureBodyPurchased'>
                 <h1>{enclosure.type.toUpperCase()}!!</h1>
                 <div id='animalGrid'>
                     {animalSec.map((ani) => <Animal key={ani.id} animal={ani}></Animal>)}
-                    <CashCollector amount={500} interval={5000} ></CashCollector>
+                    {collector}
                 </div>
             </div>
         )

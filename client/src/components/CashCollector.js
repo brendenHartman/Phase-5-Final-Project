@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch,  useSelector } from "react-redux";
 import { addBy } from "../slices/cashSlice";
 
 function CashCollector({ amount, interval }) {
   const dispatch = useDispatch();
   const [progress, setProgress] = useState(0);
-
+  const user  = useSelector(state => state.user)
+  const cash  = useSelector(state => state.cash)
   useEffect(() => {
     const progressInterval = 10; 
     const steps = interval / progressInterval; 
@@ -21,7 +22,17 @@ function CashCollector({ amount, interval }) {
 
     const intervalId = setInterval(() => {
       dispatch(addBy(amount));
-      setProgress(0); 
+      setProgress(0);
+      fetch('/users', {
+        method: 'PATCH',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            userId: user.id,
+            cash: cash
+        })
+      })
+      .then(r => r.json())
+      .then(data => console.log(data))
     }, interval);
 
     return () => {
@@ -46,30 +57,3 @@ function CashCollector({ amount, interval }) {
 }
 
 export default CashCollector;
-
-
-
-
-// import { useEffect } from "react";
-// import { useDispatch } from "react-redux";
-// import { addBy } from "../slices/cashSlice";
-
-// function CashCollector({amount, interval}){
-//     const dispatch = useDispatch()
-
-//     useEffect(() => {
-//         const intervalId = setInterval(() => {
-//           dispatch(addBy(amount)); 
-//         }, interval);
-    
-//         return () => clearInterval(intervalId);
-//       }, [dispatch]);
-
-//     return(
-//         <div>
-
-//         </div>
-//     )
-// }
-
-// export default CashCollector

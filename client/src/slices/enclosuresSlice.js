@@ -15,9 +15,18 @@ const enclosuresSlice = createSlice({
                 }
                 return enclosure;
             });
+        },
+        increaseAnimal(state,action){
+            const id = action.payload;
+            return state.map(enclosure => {
+                if (enclosure.id === id) {
+                    return { ...enclosure, num_animals: enclosure.num_animals + 1};
+                }
+                return animal;
+            });
         }
     }
 })
 
-export const { setEnclosures, buyEnclosure } = enclosuresSlice.actions;
+export const { setEnclosures, buyEnclosure, increaseAnimal } = enclosuresSlice.actions;
 export default enclosuresSlice.reducer;

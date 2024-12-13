@@ -1,20 +1,21 @@
 import { useDispatch } from "react-redux";
-import { buyAnimal } from "../slices/animalSlice";
+import { buyAnimal, increaseAnimal } from "../slices/animalSlice";
 
 function Animal({animal}){
-    const dipsatch = useDispatch()
+    const dispatch = useDispatch()
 
     function handleBuy(){
         fetch('/animals', {
             method: 'PATCH',
             headers: {'Content-Type': 'application/json'},
-            body: {
+            body: JSON.stringify({
                 animalId : animal.id,
-            }
+            })
         })
         .then(r  => r.json())
         .then(data => {
-            dipsatch(buyAnimal(animal.id))
+            dispatch(buyAnimal(animal.id))
+            dispatch(increaseAnimal(animal.enclosure_id))
         })
     }
 

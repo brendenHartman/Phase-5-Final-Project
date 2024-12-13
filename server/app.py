@@ -105,6 +105,9 @@ class Animals(Resource):
     def patch(self):
         animalId = request.get_json()['animalId']
         animal = Animal.query.filter_by(id=animalId).first()
+        enclosureID = animal.enclosure_id
+        enclosure = Enclosure.query.filter_by(id=enclosureID).first()
+        enclosure.num_animals += 1
         animal.purchased  = True
         db.session.commit()
         return animal.to_dict(), 200
