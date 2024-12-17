@@ -3,6 +3,9 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useDispatch } from "react-redux";
 import { setUser } from "../slices/userSlice";
+import { setEnclosures } from "../slices/enclosuresSlice";
+import { setAnimals } from "../slices/animalSlice";
+import { setCash } from "../slices/cashSlice";
 
 function Login(){
     const dispatch = useDispatch()
@@ -34,6 +37,9 @@ function Login(){
             console.log(data)
             history.push('/')
             dispatch(setUser(data))
+            dispatch(setEnclosures(data.enclosures))
+            dispatch(setAnimals(data.animals))
+            dispatch(setCash(data.cash))
           }})
           .catch(error => console.log(error))
         },

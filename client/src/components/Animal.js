@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
-import { buyAnimal, increaseAnimal } from "../slices/animalSlice";
+import { buyAnimal } from "../slices/animalSlice";
+import { increaseAnimal } from "../slices/enclosuresSlice";
 
 function Animal({animal}){
     const dispatch = useDispatch()

@@ -22,7 +22,7 @@ const enclosuresSlice = createSlice({
                 if (enclosure.id === id) {
                     return { ...enclosure, num_animals: enclosure.num_animals + 1};
                 }
-                return animal;
+                return enclosure;
             });
         }
     }

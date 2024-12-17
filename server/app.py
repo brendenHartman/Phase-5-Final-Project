@@ -17,8 +17,12 @@ class Users(Resource):
     def patch(self):
         userId = request.get_json()['userId']
         cash = request.get_json()['cash']
+        type = request.get_json()['type']
         user = User.query.filter_by(id=userId).first()
-        user.cash = cash
+        if type == 'add':
+            user.cash += cash
+        if type == 'subtract':
+            user.cash -= cash
         db.session.commit()
         return user.to_dict(), 200
     def post(self):
