@@ -7,7 +7,6 @@ import CashCollector from "./CashCollector";
 
 function Enclosure({enclosure}){
     const dispatch = useDispatch()
-    const cash = useSelector(state => state.cash)
     const user = useSelector(state => state.user)
 
     function onEnclosure(){
@@ -18,7 +17,8 @@ function Enclosure({enclosure}){
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 userId: user.id,
-                cash: cash
+                cash: enclosure.price,
+                type: 'subtract'
             })
         })
         .then(r => r.json())
@@ -54,7 +54,8 @@ function Enclosure({enclosure}){
             <button onClick={onEnclosure}>Purchase: ${enclosure.price}</button>
         </div>
     )
-
+    let speed = 0
+    let income = 0
     if(enclosure.purchased === true){
         let collector = (
             <div>
@@ -62,30 +63,31 @@ function Enclosure({enclosure}){
             </div>
         )
         if(enclosure.num_animals===1){
-            let speed = 10000
-            let income = 250
-            collector =(<CashCollector amount={income} interval={speed} ></CashCollector>)
+            speed = 10000
+            income = 250
+            collector =(<CashCollector enclosure={enclosure} amount={income} interval={speed} ></CashCollector>)
         }
         if(enclosure.num_animals===2){
-            let speed = 9000
-            let income = 300
-            collector =(<CashCollector amount={income} interval={speed} ></CashCollector>)
+            speed = 9000
+            income = 300
+            collector =(<CashCollector enclosure={enclosure} amount={income} interval={speed} ></CashCollector>)
         }
         if(enclosure.num_animals===3){
-            let speed = 8000
-            let income = 400
-            collector =(<CashCollector amount={income} interval={speed} ></CashCollector>)
+            speed = 8000
+            income = 400
+            collector =(<CashCollector enclosure={enclosure} amount={income} interval={speed} ></CashCollector>)
         }
         if(enclosure.num_animals===4){
-            let speed = 5000
-            let income = 500
-            collector =(<CashCollector amount={income} interval={speed} ></CashCollector>)
+            speed = 5000
+            income = 500
+            collector =(<CashCollector enclosure={enclosure} amount={income} interval={speed} ></CashCollector>)
         }
         enclosureBody = (
             <div id='enclosureBodyPurchased'>
-                <h1>{enclosure.type.toUpperCase()}!!</h1>
+                <h1>{enclosure.type.toUpperCase()}</h1>
                 <div id='animalGrid'>
                     {animalSec.map((ani) => <Animal key={ani.id} animal={ani}></Animal>)}
+                    <p>lvl: {enclosure.num_animals} | income: {income}/{speed / 1000}secs</p>
                     {collector}
                 </div>
             </div>

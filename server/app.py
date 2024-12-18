@@ -22,7 +22,7 @@ class Users(Resource):
         if type == 'add':
             user.cash += cash
         if type == 'subtract':
-            user.cash -= cash
+            user.cash = user.cash - cash
         db.session.commit()
         return user.to_dict(), 200
     def post(self):
@@ -116,11 +116,20 @@ class Animals(Resource):
         db.session.commit()
         return animal.to_dict(), 200
 
+class SignOut(Resource):
+    def get(self):
+        if session['user_id']:
+            session['user_id'] = None
+            return 204
+        else:
+            return {'error': 'no session user'}, 401
+
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Enclosures, '/enclosures', endpoint='enclosures')
 api.add_resource(Animals, '/animals', endpoint='animals')
 api.add_resource(Users, '/users', endpoint='users')
 api.add_resource(Login, '/login', endpoint='login')
+api.add_resource(SignOut, '/signout', endpoint='signout')
 
 app.secret_key = "ElbieJay22"
 if __name__ == '__main__':

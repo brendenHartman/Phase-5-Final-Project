@@ -1,7 +1,9 @@
-import { useSelector} from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
 import { Link } from "react-router-dom";
+import { setUser } from "../slices/userSlice";
 
 function MainMenu(){
+    const dispatch = useDispatch()
     const user = useSelector((state) => state.user)
     let userSec = 
     (<div id='userSec'>
@@ -17,6 +19,14 @@ function MainMenu(){
       playButton = <Link to='/Zoo'>Play</Link>
     }
 
+    function handleSignOut(){
+        fetch('/signout')
+        .then(r => r.json())
+        .then(data => {
+            console.log(data)
+            dispatch(setUser({}))
+        })
+    }
 
     return(
         <div id='MainMenu'>
@@ -24,6 +34,7 @@ function MainMenu(){
             <Link to='/tutorial'>Tutorial</Link>
             <div id='MainMenuDivider'></div>
             {userSec}
+            <button id='signOutButton' onClick={handleSignOut}>SignOut</button>
         </div>
     )
 }

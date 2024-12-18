@@ -3,7 +3,7 @@ import { useDispatch,  useSelector } from "react-redux";
 import { addBy } from "../slices/cashSlice";
 import { userCashAdd } from "../slices/userSlice";
 
-function CashCollector({ amount, interval }) {
+function CashCollector({ amount, interval, enclosure }) {
   const dispatch = useDispatch();
   const [progress, setProgress] = useState(0);
   const user  = useSelector(state => state.user)
@@ -16,7 +16,7 @@ function CashCollector({ amount, interval }) {
     const progressId = setInterval(() => {
       setProgress((prevProgress) => {
         currentProgress = prevProgress + (100 / steps);
-        return currentProgress;
+        return Math.min(currentProgress, 100);
       });
     }, progressInterval);
 
@@ -34,14 +34,15 @@ function CashCollector({ amount, interval }) {
         })
       })
       .then(r => r.json())
-      .then(data => console.log(data))
+      .then(data => console.log('bought'))
     }, interval);
 
     return () => {
       clearInterval(progressId);
+      setProgress(0)
       clearInterval(intervalId);
     };
-  }, [dispatch, interval, amount]);
+  }, [dispatch, interval, amount, enclosure.num_animals, user.id]);
 
   return (
     <div>
