@@ -74,7 +74,7 @@ class Enclosure(db.Model, SerializerMixin):
 class Achievement(db.Model, SerializerMixin):
     __tablename__ = 'achievements'
 
-    serialize_rules = ('-complete.achievement')
+    serialize_rules = ('-completes',)
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)

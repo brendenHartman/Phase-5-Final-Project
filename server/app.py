@@ -3,6 +3,15 @@ from flask import request, session
 from flask_restful import Resource
 from config import app, db, api
 from models import User, Animal, Enclosure, Achievement, Complete
+import logging
+
+logging.basicConfig(
+       level=logging.DEBUG, 
+       format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', 
+       handlers=[
+           logging.StreamHandler()  
+       ]
+   )
 
 class CheckSession(Resource):
     def get(self):
@@ -116,6 +125,12 @@ class Animals(Resource):
         db.session.commit()
         return animal.to_dict(), 200
 
+class Achievements(Resource):
+    def get(self):
+        achievements = Achievement.query.all()
+        achievementsDict = [achievement.to_dict() for achievement in achievements]
+        return achievementsDict, 200
+
 class SignOut(Resource):
     def get(self):
         if session['user_id']:
@@ -124,6 +139,7 @@ class SignOut(Resource):
         else:
             return {'error': 'no session user'}, 401
 
+api.add_resource(Achievements, '/achievements', endpoint='achievements')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Enclosures, '/enclosures', endpoint='enclosures')
 api.add_resource(Animals, '/animals', endpoint='animals')

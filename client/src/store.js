@@ -3,6 +3,7 @@ import cashReducer from './slices/cashSlice';
 import userReducer from './slices/userSlice';
 import enclosuresReducer from './slices/enclosuresSlice'
 import animalsReducer from './slices/animalSlice'
+import achievementsReducer from './slices/achievementsSlice'
 
 const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
         user: userReducer,
         enclosures: enclosuresReducer,
         animals: animalsReducer,
+        achievements: achievementsReducer
     }
 
 })

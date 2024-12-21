@@ -6,31 +6,37 @@ import { subtractBy } from "../slices/cashSlice";
 function Animal({animal}){
     const dispatch = useDispatch()
     const user = useSelector(state => state.user)
+    const cash = useSelector(state => state.cash)
     function handleBuy(){
-        fetch('/animals', {
-            method: 'PATCH',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                animalId : animal.id,
+        if(animal.price <= cash){
+            fetch('/animals', {
+                method: 'PATCH',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    animalId : animal.id,
+                })
             })
-        })
-        .then(r  => r.json())
-        .then(data => {
-            dispatch(buyAnimal(animal.id))
-            dispatch(increaseAnimal(animal.enclosure_id))
-            dispatch(subtractBy(animal.price))
-        })
-        fetch('/users', {
-            method: 'PATCH',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                userId: user.id,
-                cash: animal.price,
-                type: 'subtract'
+            .then(r  => r.json())
+            .then(data => {
+                dispatch(buyAnimal(animal.id))
+                dispatch(increaseAnimal(animal.enclosure_id))
+                dispatch(subtractBy(animal.price))
             })
-        })
-        .then(r => r.json())
-        .then(data => console.log(data))
+            fetch('/users', {
+                method: 'PATCH',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    userId: user.id,
+                    cash: animal.price,
+                    type: 'subtract'
+                })
+            })
+            .then(r => r.json())
+            .then(data => console.log(data))
+        }
+        else{
+            
+        }
     }
 
     let animalBody = (<div className="animalBody">

@@ -8,42 +8,47 @@ import CashCollector from "./CashCollector";
 function Enclosure({enclosure}){
     const dispatch = useDispatch()
     const user = useSelector(state => state.user)
-
+    const cash = useSelector(state => state.cash)
     function onEnclosure(){
-        dispatch(buyEnclosure(enclosure.type));
-        dispatch(subtractBy(enclosure.price));
-        fetch('/users', {
-            method: 'PATCH',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                userId: user.id,
-                cash: enclosure.price,
-                type: 'subtract'
+        if(enclosure.price <= cash){
+            dispatch(buyEnclosure(enclosure.type));
+            dispatch(subtractBy(enclosure.price));
+            fetch('/users', {
+               method: 'PATCH',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    userId: user.id,
+                    cash: enclosure.price,
+                    type: 'subtract'
+                })
             })
-        })
-        .then(r => r.json())
-        .then(data => console.log(data))
-        fetch('/enclosures',{
-            method: 'PATCH',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                enclosureId: enclosure.id
+            .then(r => r.json())
+            .then(data => console.log(data))
+            fetch('/enclosures',{
+                method: 'PATCH',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    enclosureId: enclosure.id
+                })
             })
-        })
-        .then(r => r.json())
-        .then(data => console.log(data))
-        fetch('/animals',{
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                type: enclosure.type,
-                userId: enclosure.user_id,
-                enclosureId: enclosure.id,
-                price: enclosure.animal_price
+            .then(r => r.json())
+            .then(data => console.log(data))
+            fetch('/animals',{
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    type: enclosure.type,
+                    userId: enclosure.user_id,
+                    enclosureId: enclosure.id,
+                    price: enclosure.animal_price
+                })
             })
-        })
-        .then(r => r.json())
-        .then(data => dispatch(addAnimals(data)))
+            .then(r => r.json())
+            .then(data => dispatch(addAnimals(data)))
+        }
+        else{
+            
+        }
     }
 
     const animals = useSelector((state) => state.animals)

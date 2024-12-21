@@ -9,6 +9,7 @@ import MainMenu from "./MainMenu";
 import Login from "./Login";
 import Signup from "./Signup";
 import Tutorial from "./Tutorial";
+import Achievements from './Achievements';
 import { setCash } from "../slices/cashSlice";
 
 function App() {
@@ -47,6 +48,9 @@ function App() {
       </Route>
       <Route exact path='/tutorial'>
         <Tutorial></Tutorial>
+      </Route>
+      <Route exact path='/achievements'>
+        <Achievements></Achievements>
       </Route>
     </Switch>
   </>
