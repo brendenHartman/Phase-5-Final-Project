@@ -3,15 +3,11 @@
 # Standard library imports
 from random import randint, choice as rc
 
-# Remote library imports
-from faker import Faker
-
 # Local imports
 from app import app
 from models import db, User, Achievement, Animal, Enclosure, Complete
 
 if __name__ == '__main__':
-    fake = Faker()
     with app.app_context():
         print("Starting seed...")
     #==========================================================================
@@ -21,10 +17,10 @@ if __name__ == '__main__':
         Achievement.query.delete()
     #==========================================================================
         items = []
-        brenden = User(username='brendenHart', password='Hartman123', cash=1000)
+        brenden = User(username='brendenHart', password='Hartman123', cash=0)
         db.session.add(brenden)
         enclosureStarterPackage = []
-        enc1=Enclosure(type='rabbit',price=0,num_animals=0,purchased=False,animal_price=250,user=brenden)
+        enc1=Enclosure(type='rabbit',price=0,num_animals=0,purchased=False,animal_price=0,user=brenden)
         enclosureStarterPackage.append(enc1)
         enc2=Enclosure(type='pig',price=500,num_animals=0,purchased=False,animal_price=500,user=brenden)
         enclosureStarterPackage.append(enc2)
@@ -42,21 +38,21 @@ if __name__ == '__main__':
         enclosureStarterPackage.append(enc8)
         db.session.add_all(enclosureStarterPackage)
         achievementsPackage = []
-        ach1=Achievement(name='1',description='1',reward=1000)
+        ach1=Achievement(name='Starting Small',description='Purchase your first enclosure!',reward=100)
         achievementsPackage.append(ach1)
-        ach2=Achievement(name='2',description='2',reward=1000)
+        ach2=Achievement(name='Welcome To The Family',description='Purchase your first animal!',reward=100)
         achievementsPackage.append(ach2)
-        ach3=Achievement(name='3',description='3',reward=1000)
+        ach3=Achievement(name='We Need More Space',description='Fill up your first enclosure!',reward=100)
         achievementsPackage.append(ach3)
-        ach4=Achievement(name='4',description='4',reward=1000)
+        ach4=Achievement(name='Cash Collector',description='Have 5,000 in the bank at one time!',reward=1000)
         achievementsPackage.append(ach4)
-        ach5=Achievement(name='5',description='5',reward=1000)
+        ach5=Achievement(name='Cash Hoarder',description='Have 10,000 in the bank at one time!',reward=2500)
         achievementsPackage.append(ach5)
-        ach6=Achievement(name='6',description='6',reward=1000)
+        ach6=Achievement(name='Cash Savant',description='Have 32,000 in the bank at one time!',reward=1000)
         achievementsPackage.append(ach6)
-        ach7=Achievement(name='7',description='7',reward=1000)
+        ach7=Achievement(name='Fully Enclosed',description='Purchase all enclosures!',reward=32000)
         achievementsPackage.append(ach7)
-        ach8=Achievement(name='8',description='8',reward=1000)
+        ach8=Achievement(name='ZooOlogy',description='Purchase all enclosures and animals!',reward=100000000000)
         achievementsPackage.append(ach8)
         db.session.add_all(achievementsPackage)
         db.session.commit()
