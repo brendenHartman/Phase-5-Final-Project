@@ -9,10 +9,9 @@ function CashCollector({ amount, interval, enclosure }) {
   const user  = useSelector(state => state.user)
   useEffect(() => {
     const progressInterval = 10; 
-    const steps = interval / progressInterval; 
-
+    const steps = interval / progressInterval;
     let currentProgress = 0;
-
+    
     const progressId = setInterval(() => {
       setProgress((prevProgress) => {
         currentProgress = prevProgress + (100 / steps);

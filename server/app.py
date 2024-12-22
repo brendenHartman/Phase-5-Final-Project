@@ -20,7 +20,7 @@ class CheckSession(Resource):
             user = User.query.filter_by(id = session['user_id']).first()
             return user.to_dict(), 200
         else:
-            return {'error': 'no'}, 401
+            return {'error': 'no session user'}, 200
 
 class Users(Resource):
     def patch(self):
@@ -131,6 +131,28 @@ class Achievements(Resource):
         achievementsDict = [achievement.to_dict() for achievement in achievements]
         return achievementsDict, 200
 
+class Completes(Resource):
+    def get(self):
+        user = User.query.filter_by(id=session['user_id']).first()
+        completes = Complete.query.filter_by(user_id=user.id).all()
+        if len(completes) > 0:
+            completesDict = [com.to_dict() for com in completes]
+            return completesDict, 200
+        else:
+            return {'error': 'no completed achievements'}, 404
+    def post(self):
+        user = User.query.filter_by(id=session['user_id']).first()
+        code = request.get_json()['code']
+        achievement = Achievement.query.filter_by(code = code).first()
+        completed = Complete.query.filter(Complete.user_id == user.id,Complete.achievement_id == achievement.id).first()
+        if not completed:
+            complete = Complete(user=user,achievement=achievement)
+            db.session.add(complete)
+            db.session.commit()
+            return complete.to_dict(), 201
+        else:
+            return {'message': 'already achieved'}, 200
+
 class SignOut(Resource):
     def get(self):
         if session['user_id']:
@@ -140,6 +162,7 @@ class SignOut(Resource):
             return {'error': 'no session user'}, 401
 
 api.add_resource(Achievements, '/achievements', endpoint='achievements')
+api.add_resource(Completes, '/completes', endpoint='completes')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Enclosures, '/enclosures', endpoint='enclosures')
 api.add_resource(Animals, '/animals', endpoint='animals')

@@ -18,8 +18,10 @@ const progressSlice = createSlice({
             return action.payload
         },
         completeAch(state,action){
-            state[action.payload] = true
-            state.completed += 1
+            if(state[action.payload] === false){
+                state.completed += 1
+                state[action.payload] = true
+            }
             return state
         }
     }

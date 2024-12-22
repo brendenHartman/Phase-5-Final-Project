@@ -5,6 +5,7 @@ import enclosuresReducer from './slices/enclosuresSlice'
 import animalsReducer from './slices/animalSlice'
 import achievementsReducer from './slices/achievementsSlice'
 import progressReducer from './slices/progressSlice'
+import completesReducer from './slices/completesSlice'
 
 const store = configureStore({
     reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
         animals: animalsReducer,
         achievements: achievementsReducer,
         progress: progressReducer,
+        completes: completesReducer,
     }
 
 })

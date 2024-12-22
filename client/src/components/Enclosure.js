@@ -3,12 +3,96 @@ import Animal from "./Animal";
 import { buyEnclosure } from "../slices/enclosuresSlice";
 import { subtractBy } from "../slices/cashSlice";
 import { addAnimals } from "../slices/animalSlice";
+import { completeAch } from "../slices/progressSlice";
 import CashCollector from "./CashCollector";
+import { useEffect } from "react";
 
 function Enclosure({enclosure}){
     const dispatch = useDispatch()
     const user = useSelector(state => state.user)
     const cash = useSelector(state => state.cash)
+    const enclosures = useSelector(state => state.enclosures)
+    const progress = useSelector(state => state.progress)
+    useEffect(() => {
+        if(enclosures.length > 0 && progress.ss === false){
+            if(enclosures[0].purchased  === true){
+                fetch('/completes',{
+                    method: 'POST',
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      code: 'ss'
+                    })
+                  })
+                  .then(r => r.json())
+                  .then(data => dispatch(completeAch('ss')))
+            }
+        }
+        if(enclosures.length === 8 && progress.fe === false){
+            let allPurchased = true
+            for(let enclosure of enclosures){
+                if(!enclosure.purchased){
+                    allPurchased = false
+                    break
+                }
+            }
+            if(allPurchased === true){
+                fetch('/completes',{
+                    method: 'POST',
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      code: 'fe'
+                    })
+                  })
+                  .then(r => r.json())
+                  .then(data => dispatch(completeAch('fe')))
+            }
+        }
+        if(cash >= 32000 && progress.cs === false){
+              fetch('/completes',{
+                method: 'POST',
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  code: 'cs'
+                })
+              })
+              .then(r => r.json())
+              .then(data => dispatch(completeAch('cs')))
+            }
+            if(cash >= 10000 && progress.ch === false){
+              fetch('/completes',{
+                method: 'POST',
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  code: 'ch'
+                })
+              })
+              .then(r => r.json())
+              .then(data => dispatch(completeAch('ch')))
+            }
+            if(cash >= 5000 && progress.cc === false){
+              fetch('/completes',{
+                method: 'POST',
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  code: 'cc'
+                })
+              })
+              .then(r => r.json())
+              .then(data => dispatch(completeAch('cc')))
+            }
+    },[dispatch, enclosures, cash])
+    
+    
     function onEnclosure(){
         if(enclosure.price <= cash){
             dispatch(buyEnclosure(enclosure.type));

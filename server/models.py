@@ -80,6 +80,7 @@ class Achievement(db.Model, SerializerMixin):
     name = db.Column(db.String)
     description = db.Column(db.String)
     reward = db.Column(db.Integer)
+    code =  db.Column(db.String)
 
     completes = db.relationship('Complete', back_populates = 'achievement')
 
@@ -93,9 +94,10 @@ class Achievement(db.Model, SerializerMixin):
 class Complete(db.Model, SerializerMixin):
     __tablename__ = 'completes'
 
-    serialize_rules = ('-user.completes', '-achievement.completes')
+    serialize_rules = ('-user.completes', '-achievement.completes', '-user.enclosures','-user.animals')
 
     id = db.Column(db.Integer, primary_key = True)
+    claimed = db.Column(db.Boolean)
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship('User', back_populates = 'completes')
