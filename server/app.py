@@ -146,18 +146,24 @@ class Completes(Resource):
         achievement = Achievement.query.filter_by(code = code).first()
         completed = Complete.query.filter(Complete.user_id == user.id,Complete.achievement_id == achievement.id).first()
         if not completed:
-            complete = Complete(user=user,achievement=achievement)
+            complete = Complete(user=user,achievement=achievement,claimed=False)
             db.session.add(complete)
             db.session.commit()
             return complete.to_dict(), 201
         else:
             return {'message': 'already achieved'}, 200
+    def patch(self):
+        comId  = request.get_json()['com']
+        complete = Complete.query.filter_by(id=comId).first()
+        complete.claimed = True
+        db.session.commit()
+        return complete.to_dict(), 201
 
 class SignOut(Resource):
     def get(self):
         if session['user_id']:
             session['user_id'] = None
-            return 204
+            return 200
         else:
             return {'error': 'no session user'}, 401
 

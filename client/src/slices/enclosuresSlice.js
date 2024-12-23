@@ -7,8 +7,8 @@ const enclosuresSlice = createSlice({
         setEnclosures(state,action){
             return action.payload
         },
-        buyEnclosure(state, action) {
-            const type = action.payload;
+        buyEnclosure(state, action){
+            const type = action.payload
             return state.map(enclosure => {
                 if (enclosure.type === type) {
                     return { ...enclosure, purchased: true };
