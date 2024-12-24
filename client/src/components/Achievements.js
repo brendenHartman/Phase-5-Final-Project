@@ -7,6 +7,9 @@ import { setCompletes } from "../slices/completesSlice";
 
 function Achievements(){
     const dispatch = useDispatch()
+    const achievements = useSelector(state => state.achievements)  
+    const completes = useSelector(state => state.completes)
+    const cash = useSelector(state => state.cash)
 
     useEffect(() => {
         fetch('/achievements')
@@ -15,33 +18,31 @@ function Achievements(){
         fetch('/completes')
         .then(r => r.json())
         .then(data => dispatch(setCompletes(data)))
-    }, [dispatch])
+    }, [dispatch, cash])
 
-    const achievements = useSelector(state => state.achievements)  
-    const completes = useSelector(state => state.completes)
+    
 
     let achievementObjs = []
 
-    for(let ach in achievements){
-        for(let com in completes){
-            if(com.achieivement_id === ach.id){
-                if(com.claimed === false){
-                    achievementObjs.append({
-                        ach: ach,
-                        com: true,
-                        claimed: false
-                    })
-                }
-                else{
-                    achievementObjs.append({
-                        ach: ach,
-                        com: true,
-                        claimed: true
-                    })
-                }
-            }
+    achievements.forEach(achievement => {
+        const complete = completes.find(com => com.achievement_id === achievement.id);
+    
+        if (complete) {
+            achievementObjs.push({
+                ach: achievement,
+                com: true,
+                claimed: complete.claimed
+            })
+        } else {
+            achievementObjs.push({
+                ach: achievement,
+                com: false,
+                claimed: false
+            })
         }
-    }
+    })
+
+    
 
     let achSec= achievementObjs.map(obj => <Achievement key={obj.ach.id} ach={obj.ach} com={obj.com} claimed={obj.claimed}/>)
 

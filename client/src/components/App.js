@@ -11,6 +11,7 @@ import Signup from "./Signup";
 import Tutorial from "./Tutorial";
 import Achievements from './Achievements';
 import { setCash } from "../slices/cashSlice";
+import { setCompletes } from "../slices/completesSlice";
 
 function App() {
   const dispatch = useDispatch()
@@ -27,6 +28,7 @@ function App() {
       dispatch(setEnclosures(data.enclosures))
       dispatch(setAnimals(data.animals))
       dispatch(setCash(data.cash))
+      dispatch(setCompletes(data.completes))
     }})
     .catch()
     },[dispatch])

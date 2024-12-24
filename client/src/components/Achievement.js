@@ -2,23 +2,23 @@ import { useDispatch, useSelector } from "react-redux"
 import { addBy } from "../slices/cashSlice"
 import { userCashAdd } from "../slices/userSlice"
 import { claimCom } from "../slices/completesSlice"
+import { useEffect } from "react"
 
 function Achievement({ach, com, claimed}){
     const user = useSelector(state => state.user)
     const completes = useSelector(state => state.completes)
     const dispatch = useDispatch()
     let botSec = <h5>Incomplete</h5>
-
+    const comp = completes.find(com => com.achievement_id === ach.id)
     function claimAch(){
-        const com = completes.find(com => com.achievement_id === ach.id)
         fetch('/completes', {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",
               },
-              body: {
-                com: com.id
-              }
+              body: JSON.stringify({
+                com: comp.id
+              })
         })
         .then()
         .then(data => dispatch(claimCom(ach.id)))
@@ -27,11 +27,11 @@ function Achievement({ach, com, claimed}){
             headers: {
                 "Content-Type": "application/json",
               },
-            body: {
+            body: JSON.stringify({
                 userId: user.id,
                 cash: ach.reward,
                 type: 'add'
-            }
+            })
         })
         .then(r => r.json())
         .then(data => {
@@ -39,7 +39,6 @@ function Achievement({ach, com, claimed}){
             dispatch(userCashAdd(ach.reward))
         })
     }
-
     if(com && !claimed){
         botSec = <button onClick={claimAch}>Claim</button>
     }
