@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { addBy } from "../slices/cashSlice"
 import { userCashAdd } from "../slices/userSlice"
 import { claimCom } from "../slices/completesSlice"
-import { useEffect } from "react"
 
 function Achievement({ach, com, claimed}){
     const user = useSelector(state => state.user)

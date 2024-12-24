@@ -1,31 +1,28 @@
-import { createSlice } from "@reduxjs/toolkit"; 
+import { createSlice } from "@reduxjs/toolkit";
 
 const progressSlice = createSlice({
     name: 'progress',
     initialState: {
         completed: 0,
-        ss: false,
-        wttf: false,
-        wnms: false,
         cc: false,
         ch: false,
         cs: false,
+        wttf: false,
+        ss: false,
+        wnms: false,
         fe: false,
-        zoo: false
+        zoo: false,
     },
     reducers: {
-        setProgress(state,action){
-            return action.payload
-        },
         completeAch(state,action){
             if(state[action.payload] === false){
-                state.completed += 1
                 state[action.payload] = true
+                state.completed += 1
             }
             return state
         }
     }
 })
 
-export const { setProgress, completeAch } = progressSlice.actions
-export default progressSlice.reducer
+export const { completeAch } = progressSlice.actions;
+export default progressSlice.reducer;
