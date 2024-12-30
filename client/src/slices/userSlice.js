@@ -12,7 +12,7 @@ const userSlice = createSlice({
             return state
         },
         userCashSubtract(state,action){
-            state.cash -= action.payload
+            state.cash = state.cash - action.payload
             return state
         }
     }

@@ -16,7 +16,11 @@ function Achievements(){
         .then(r => r.json())
         .then(data => dispatch(setAchievements(data)))
         fetch('/completes')
-        .then(r => r.json())
+        .then(r => {
+            if(r.ok){
+                return r.json()
+            }
+        })
         .then(data => dispatch(setCompletes(data)))
     }, [dispatch, cash])
 

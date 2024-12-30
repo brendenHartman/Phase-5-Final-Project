@@ -30,6 +30,7 @@ function MainMenu(){
 
     return(
         <div id='MainMenu'>
+            <h1 id='mainTitle'>ZooOlogy</h1>
             {playButton}
             <Link to='/tutorial'>Tutorial</Link>
             <div id='MainMenuDivider'></div>

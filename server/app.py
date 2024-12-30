@@ -20,7 +20,7 @@ class CheckSession(Resource):
             user = User.query.filter_by(id = session['user_id']).first()
             return user.to_dict(), 200
         else:
-            return {'error': 'no session user'}, 200
+            return {'error': 'no session user'}, 404
 
 class Users(Resource):
     def patch(self):
