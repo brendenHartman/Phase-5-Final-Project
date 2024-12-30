@@ -6,6 +6,7 @@ import { addAnimals } from "../slices/animalSlice";
 import { completeAch } from "../slices/progressSlice";
 import CashCollector from "./CashCollector";
 import { useEffect } from "react";
+import { userCashSubtract } from "../slices/userSlice";
 
 function Enclosure({enclosure}){
     const dispatch = useDispatch()
@@ -97,6 +98,7 @@ function Enclosure({enclosure}){
         if(enclosure.price <= cash){
             dispatch(buyEnclosure(enclosure.type));
             dispatch(subtractBy(enclosure.price));
+            dispatch(userCashSubtract(enclosure.price))
             fetch('/users', {
                method: 'PATCH',
                 headers: {'Content-Type': 'application/json'},

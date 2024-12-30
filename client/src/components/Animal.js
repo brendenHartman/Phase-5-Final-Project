@@ -4,6 +4,7 @@ import { increaseAnimal } from "../slices/enclosuresSlice";
 import { subtractBy } from "../slices/cashSlice";
 import { completeAch } from "../slices/progressSlice";
 import { useEffect } from "react";
+import { userCashSubtract } from "../slices/userSlice";
 
 function Animal({animal}){
     const dispatch = useDispatch()
@@ -93,6 +94,7 @@ function Animal({animal}){
                 dispatch(buyAnimal(animal.id))
                 dispatch(increaseAnimal(animal.enclosure_id))
                 dispatch(subtractBy(animal.price))
+                dispatch(userCashSubtract(animal.price))
             })
             fetch('/users', {
                 method: 'PATCH',

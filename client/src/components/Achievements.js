@@ -49,6 +49,7 @@ function Achievements(){
     return(
         <div id='achievements'>
             <Link to='/zoo'>Back</Link>
+            <h1>{cash}</h1>
             <div id='achievementsGrid'>
                 {achSec}
             </div>
