@@ -7,16 +7,16 @@ function MainMenu(){
     const user = useSelector((state) => state.user)
     let userSec = 
     (<div id='userSec'>
-        <Link className="logInLink" to="/login">Login</Link>
+        <Link id='logInLink' className="logInLink" to="/login">Login</Link>
         <h1>/</h1>
-        <Link className='signUpLink' to='/signup'>Signup</Link>
+        <Link id='signUpLink' className='signUpLink' to='/signup'>Signup</Link>
     </div>)
 
-    let playButton = <Link to='/Login'>Play</Link>
+    let playButton = <Link className='playButt' to='/Login'>Play</Link>
 
     if('id' in user){
-      userSec = <h1>Welcome, {user.username}!</h1>
-      playButton = <Link to='/Zoo'>Play</Link>
+      userSec = <h1 id='' >Welcome, {user.username}!</h1>
+      playButton = <Link className='playButt' to='/Zoo'>Play</Link>
     }
 
     function handleSignOut(){
@@ -32,7 +32,7 @@ function MainMenu(){
         <div id='MainMenu'>
             <h1 id='mainTitle'>ZooOlogy</h1>
             {playButton}
-            <Link to='/tutorial'>Tutorial</Link>
+            <Link id='tutLink' to='/tutorial'>Tutorial</Link>
             <div id='MainMenuDivider'></div>
             {userSec}
             <button id='signOutButton' onClick={handleSignOut}>SignOut</button>
