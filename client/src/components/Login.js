@@ -47,18 +47,22 @@ function Login(){
 
     return(
         <div id='LoginScreen'>
-        <form id='loginForm' onSubmit={formik.handleSubmit}>
-            <label htmlFor='username'>Username:</label>
-            <input id="username" className='logInput' onChange={formik.handleChange} value={formik.values.username} />
-            <p>{formik.errors.username}</p>
-            <label htmlFor='password'>Password:</label>
-            <input id="password" className='logInput' onChange={formik.handleChange} value={formik.values.password} />
-            <p>{formik.errors.password}</p>
-            <input id="submit" type="submit" />
-        </form>
-        <Link to='/'>Back To Main Menu</Link>
-        <p>Don't have an account already?</p>
-        <Link to='/signup'>Signup Here</Link>
+          <h1 id='logInHeader'>Login: </h1>
+          <form id='loginForm' onSubmit={formik.handleSubmit}>
+              <label htmlFor='username'>Username:</label>
+              <input id="username" className='logInput' onChange={formik.handleChange} value={formik.values.username} />
+              <p>{formik.errors.username}</p>
+              <label htmlFor='password'>Password:</label>
+              <input id="password" className='logInput' onChange={formik.handleChange} value={formik.values.password} />
+              <p>{formik.errors.password}</p>
+              <input id="submit" type="submit" />
+          </form>
+          <p>Don't have an account already?</p>
+          <div id='logInBottSec'>
+            <Link to='/'>Back To Main Menu</Link>
+            <p>/</p>
+            <Link to='/signup'>Signup Here</Link>
+          </div>
         </div>
     )
 }

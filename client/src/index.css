@@ -94,7 +94,7 @@ html{
 .playButt{
     position: absolute;
     font-size: 40px;
-    margin-bottom: 240px;
+    margin-bottom: 200px;
     border: 5px solid white;
     padding: 0 10px;
     border-radius: 5px;
@@ -121,6 +121,7 @@ html{
     justify-content: space-evenly;
     align-items: center;
     width: 250px;
+    height: 200px;
 }
 
 #userSecIn{
@@ -133,6 +134,7 @@ html{
     justify-content: space-evenly;
     align-items: center;
     width: 250px;
+    height: 200px;
 }
 
 #welcome{
@@ -176,4 +178,42 @@ html{
     color: rgb(155,155,155);
     border: 5px solid rgb(155,155,155);
     border-radius: 5px;
+}
+
+#LoginScreen{
+    height: (100% - 20px);
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgb(37, 37, 37);
+    font-family: "Walter Turncoat", cursive;
+    color: white;
+    border: 10px solid rgb(247, 177, 112);
+}
+
+#loginForm{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#logInBottSec{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#logInHeader{
+    margin: 0;
+    font-size: 100px;
 }
