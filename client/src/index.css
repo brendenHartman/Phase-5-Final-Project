@@ -21,25 +21,17 @@ html{
 }
 
 .enclosure{
-    border: 2px solid black;
-    width: 45%;
+    width: 40%;
     height: 400px;
-}
-
-#ZooPageMain{
-    height: 100%;
-    width: 100%;
-    margin: 0;
+    margin-bottom: 50px;
+    background-color: rgb(179, 219, 84);
+    border-radius: 10px;
+    border: 5px solid black;
 }
 
 #cashCounter{
     height: 60px;
     width: 100px;
-}
-
-#TEMPADD{
-    height: 20px;
-    width: 20px;
 }
 
 #enclosureGrid{
@@ -51,6 +43,7 @@ html{
     justify-content: space-around;
     align-content: space-between;
     align-items: center;
+    margin-top: 50px;
 }
 
 .animal{
@@ -216,4 +209,135 @@ html{
 #logInHeader{
     margin: 0;
     font-size: 100px;
+}
+
+#BackToMain{
+    text-decoration: none;
+    color: white;
+    height: 40px;
+    height: 40px;
+    font-size: 25px;
+    border: 5px solid white;
+    border-radius: 5px;
+    padding: 0 6px;
+}
+
+#switchToSign{
+    text-decoration: none;
+    color: white;
+    height: 40px;
+    height: 40px;
+    font-size: 25px;
+    border: 5px solid white;
+    border-radius: 5px;
+    padding: 0 6px;
+}
+
+#switchToSign:hover, #BackToMain:hover{
+    color: grey;
+    border: 5px solid grey;
+}
+
+#logInBottSec{
+    width: 400px;
+}
+
+#SignUpForm{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#SignUpBottSec{
+    width: 400px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#SignUpHeader{
+    margin: 0;
+    font-size: 100px;
+}
+
+#SignUpPage{
+    height: (100% - 20px);
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgb(37, 37, 37);
+    font-family: "Walter Turncoat", cursive;
+    color: white;
+    border: 10px solid rgb(247, 177, 112);
+}
+
+#SwitchToLogin{
+    text-decoration: none;
+    color: white;
+    height: 40px;
+    height: 40px;
+    font-size: 25px;
+    border: 5px solid white;
+    border-radius: 5px;
+    padding: 0 6px;
+}
+
+#SwitchToLogin:hover{
+    color: grey;
+    border: 5px solid grey;
+}
+
+#ZooPageMain{
+    height: 100%;
+    width: 100%;
+    overflow: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgb(205, 238, 129);
+    font-family: "Walter Turncoat", cursive;
+}
+
+#cashCounter{
+    display: flex;
+    width: 110px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 20px;
+    right: 170px;
+    background-color: rgb(100, 226, 83);
+    border: 3px solid black;
+    border-radius: 60px;
+}
+
+#MenuButt{
+    display: flex;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 40px;
+    right: 100px;
+    background-color: rgb(100, 226, 83);
+    border: 3px solid black;
+    border-radius: 10px;
+    background-image: url('3527105-200.png');
+    background-size: contain;
+    background-position: center;
 }

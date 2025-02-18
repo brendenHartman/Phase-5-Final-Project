@@ -59,9 +59,9 @@ function Login(){
           </form>
           <p>Don't have an account already?</p>
           <div id='logInBottSec'>
-            <Link to='/'>Back To Main Menu</Link>
+            <Link id='BackToMain'to='/'>Main Menu</Link>
             <p>/</p>
-            <Link to='/signup'>Signup Here</Link>
+            <Link id='switchToSign' to='/signup'>Signup Here</Link>
           </div>
         </div>
     )

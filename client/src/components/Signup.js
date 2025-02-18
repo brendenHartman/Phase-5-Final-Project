@@ -47,8 +47,9 @@ function Signup(){
     });
     
     return(
-        <div id='SignupPage'>
-            <form id='loginForm' onSubmit={formikSign.handleSubmit}>
+        <div id='SignUpPage'>
+          <h1 id='SignUpHeader'>SignUp:</h1>
+            <form id='SignUpForm' onSubmit={formikSign.handleSubmit}>
                 <label htmlFor='username'>Username:</label>
                 <input id="username" className='logInput' onChange={formikSign.handleChange} value={formikSign.values.username} />
                 <p>{formikSign.errors.username}</p>
@@ -57,9 +58,12 @@ function Signup(){
                 <p>{formikSign.errors.password}</p>
                 <input id="submit" type="submit" />
             </form>
-            <Link to='/'>Back To Main Menu</Link>
             <p>Have An Acount Already?</p>
-            <Link to='/login'>Login Here</Link>
+            <div id='SignUpBottSec'>
+              <Link id='BackToMain'to='/'>Main Menu</Link>
+              <p> / </p>
+              <Link id='SwitchToLogin' to='/login'>Login Here</Link>
+            </div>
         </div>
     )
 }
