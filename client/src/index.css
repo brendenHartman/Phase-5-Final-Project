@@ -491,7 +491,7 @@ html{
     border: 3px solid black;
     border-radius: 10px;
     font-size: 20px;
-    top: 45px;
+    top: 42px;
     right: 20px;
     display: flex;
     align-items: center;
@@ -501,4 +501,40 @@ html{
 
 #mainButt2:hover{
     background-color: rgb(73, 158, 62);
+}
+
+#errorMsg{
+    background-color: rgb(221, 126, 126);
+    opacity: 50%;
+    color: black;
+    position: absolute;
+    width: 20%;
+    height: 200px;
+    top: 300px; 
+    right: 200px;
+    font-size: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 3px solid black;
+    border-radius: 5px;
+}
+
+#errorMsg2{
+    background-color: rgb(221, 126, 126);
+    opacity: 75%;
+    color: black;
+    position: absolute;
+    width: 10%;
+    height: 40px;
+    top: 40px; 
+    right: 300px;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 3px solid black;
+    border-radius: 5px;
 }

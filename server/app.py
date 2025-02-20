@@ -38,12 +38,12 @@ class Users(Resource):
         username = request.get_json()['username']
         userExist = User.query.filter_by(username=username).first()
         if userExist:
-            return {'error': 'username in use'}, 401
+            return {'error': 'username already in use'}, 400
         else: 
             user = User(
                 username=request.get_json()['username'],
                 password=request.get_json()['password'],
-                cash=1000,
+                cash=0,
             )
             enclosureStarterPackage = []
             enc1=Enclosure(type='rabbit',price=0,num_animals=0,purchased=False,animal_price=250,user=user)
@@ -71,11 +71,11 @@ class Users(Resource):
 class Login(Resource):
     def post(self):
         user = User.query.filter_by(username=request.get_json()['username']).first()
-        if user:
+        if user and user.password == request.get_json()['password']:
             session['user_id'] = user.id
             return user.to_dict(), 201
         else:
-            return {'error': 'no'}, 401
+            return {'error': 'username does not exist'}, 401
 
 class Enclosures(Resource):
     def get(self):

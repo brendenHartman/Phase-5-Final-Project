@@ -7,6 +7,7 @@ import { completeAch } from "../slices/progressSlice";
 import CashCollector from "./CashCollector";
 import { useEffect } from "react";
 import { userCashSubtract } from "../slices/userSlice";
+import { useState } from "react";
 
 function Enclosure({enclosure}){
     const dispatch = useDispatch()
@@ -14,6 +15,8 @@ function Enclosure({enclosure}){
     const cash = useSelector(state => state.cash)
     const enclosures = useSelector(state => state.enclosures)
     const progress = useSelector(state => state.progress)
+    const [errorMessage, setErrorMessage] = useState("");
+
     useEffect(() => {
         if(enclosures.length > 0 && progress.ss === false){
             if(enclosures[0].purchased  === true){
@@ -133,7 +136,10 @@ function Enclosure({enclosure}){
             .then(data => dispatch(addAnimals(data)))
         }
         else{
-            
+            setErrorMessage('not enough money!!')
+            setTimeout(() =>  {
+              setErrorMessage('');
+            }, 3000)
         }
     }
 
@@ -156,22 +162,22 @@ function Enclosure({enclosure}){
         )
         if(enclosure.num_animals===1){
             speed = 10000
-            income = 250
+            income = 20 * enclosure.id
             collector =(<CashCollector enclosure={enclosure} amount={income} interval={speed} ></CashCollector>)
         }
         if(enclosure.num_animals===2){
             speed = 9000
-            income = 300
+            income = 50 * enclosure.id
             collector =(<CashCollector enclosure={enclosure} amount={income} interval={speed} ></CashCollector>)
         }
         if(enclosure.num_animals===3){
             speed = 8000
-            income = 400
+            income = 75 * enclosure.id
             collector =(<CashCollector enclosure={enclosure} amount={income} interval={speed} ></CashCollector>)
         }
         if(enclosure.num_animals===4){
             speed = 5000
-            income = 500
+            income = 150 * enclosure.id
             collector =(<CashCollector enclosure={enclosure} amount={income} interval={speed} ></CashCollector>)
         }
         enclosureBody = (
@@ -188,6 +194,7 @@ function Enclosure({enclosure}){
 
     return(
         <div className='enclosure' id={enclosure.id}>
+            {errorMessage && <div id='errorMsg2'>{errorMessage}</div>}
             {enclosureBody}
         </div>
     )

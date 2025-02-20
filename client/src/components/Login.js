@@ -6,10 +6,12 @@ import { setUser } from "../slices/userSlice";
 import { setEnclosures } from "../slices/enclosuresSlice";
 import { setAnimals } from "../slices/animalSlice";
 import { setCash } from "../slices/cashSlice";
+import { useState } from "react";
 
 function Login(){
     const dispatch = useDispatch()
     const history = useHistory()
+    const [errorMessage, setErrorMessage] = useState("");
     const formSchema = yup.object().shape({
         username: yup.string().required('Must Enter Username').max(16).min(4), 
         password: yup.string().required('Must Enter Password').max(16).min(8),
@@ -29,8 +31,12 @@ function Login(){
             body: JSON.stringify(values),
           })
           .then(res => {
-            if(res.ok){
-              return res.json()
+            if (res.ok) {
+              return res.json();
+            } else {
+              return res.json().then(data => {
+                throw new Error(data.message || "username or password is incorrect");
+              });
             }
           })
           .then(data  => {if(data){
@@ -41,13 +47,14 @@ function Login(){
             dispatch(setAnimals(data.animals))
             dispatch(setCash(data.cash))
           }})
-          .catch(error => console.log(error))
+          .catch(error => setErrorMessage(error.message))
         },
       });
 
     return(
         <div id='LoginScreen'>
           <h1 id='logInHeader'>Login: </h1>
+          {errorMessage && <div id='errorMsg'>{errorMessage}</div>}
           <form id='loginForm' onSubmit={formik.handleSubmit}>
               <label htmlFor='username'>Username:</label>
               <input id="username" className='logInput' onChange={formik.handleChange} value={formik.values.username} />
