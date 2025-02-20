@@ -119,7 +119,7 @@ function Animal({animal}){
 
     if(animal.purchased === true){
         animalBody = (<div className="animalBody">
-            <h1>{animal.type}</h1>
+            <h3>{animal.type}</h3>
         </div>)
     }
 

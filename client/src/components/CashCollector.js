@@ -44,7 +44,7 @@ function CashCollector({ amount, interval, enclosure }) {
   }, [dispatch, interval, amount, enclosure.num_animals, user.id]);
 
   return (
-    <div>
+    <div className="counter">
       <div style={{ width: "100%", backgroundColor: "#ccc" }}>
         <div
           style={{

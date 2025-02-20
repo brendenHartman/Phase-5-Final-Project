@@ -142,7 +142,8 @@ function Enclosure({enclosure}){
     
     let enclosureBody = (
         <div id='enclosureBodyUnpurchased'>
-            <button onClick={onEnclosure}>Purchase: ${enclosure.price}</button>
+            <h1 className="enclosureTitle">{enclosure.type.toUpperCase()} ENCLOSURE</h1>
+            <button className='enclosurePurButt' onClick={onEnclosure}>Purchase: ${enclosure.price}</button>
         </div>
     )
     let speed = 0
@@ -175,12 +176,12 @@ function Enclosure({enclosure}){
         }
         enclosureBody = (
             <div id='enclosureBodyPurchased'>
-                <h1>{enclosure.type.toUpperCase()}</h1>
-                <div id='animalGrid'>
+                <h1 className="enclosureTitle">{enclosure.type.toUpperCase()} ENCLOSURE</h1>
+                <div className='animalGrid' id='animalGrid'>
                     {animalSec.map((ani) => <Animal key={ani.id} animal={ani}></Animal>)}
-                    <p>lvl: {enclosure.num_animals} | income: {income}/{speed / 1000}secs</p>
-                    {collector}
                 </div>
+                <p className="incomeDesc">lvl: {enclosure.num_animals} | income: {income}/{speed / 1000}secs</p>
+                {collector}
             </div>
         )
     }
