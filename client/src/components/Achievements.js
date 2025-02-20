@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Achievement from "./Achievement";
 import { setAchievements } from "../slices/achievementsSlice";
@@ -52,8 +52,8 @@ function Achievements(){
 
     return(
         <div id='achievements'>
-            <Link to='/zoo'>Back</Link>
-            <h1>{cash}</h1>
+            <h2 id='cashCounter'>${cash}</h2>
+            <Link id='mainButt2' to='/zoo'>Main Menu</Link>
             <div id='achievementsGrid'>
                 {achSec}
             </div>

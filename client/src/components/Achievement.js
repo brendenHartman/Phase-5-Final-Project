@@ -7,7 +7,7 @@ function Achievement({ach, com, claimed}){
     const user = useSelector(state => state.user)
     const completes = useSelector(state => state.completes)
     const dispatch = useDispatch()
-    let botSec = <h5>Incomplete</h5>
+    let botSec = <h5 style={{border: '4px solid red'}} className="achBot">Incomplete</h5>
     const comp = completes.find(com => com.achievement_id === ach.id)
     function claimAch(){
         fetch('/completes', {
@@ -39,17 +39,17 @@ function Achievement({ach, com, claimed}){
         })
     }
     if(com && !claimed){
-        botSec = <button onClick={claimAch}>Claim</button>
+        botSec = <button style={{border: '4px solid green'}}className="achBot" onClick={claimAch}>Claim</button>
     }
     else if(com && claimed){
-        botSec = <h5>Claimed</h5>
+        botSec = <h5 style={{border: '4px solid gold'}} className="achBot">Claimed</h5>
     }
 
     return(
-        <div>
-            <h1>{ach.name}</h1>
-            <h3>{ach.description}</h3>
-            <h4>Reward: {ach.reward}</h4>
+        <div className="achBody">
+            <h1 className="achName">{ach.name}</h1>
+            <h3 className="achDesc">Goal: {ach.description}</h3>
+            <h4 className="achRew">Reward: {ach.reward}</h4>
             {botSec}
         </div>
     )

@@ -37,7 +37,6 @@ function MainMenu(){
         <div id='MainMenu'>
             <h1 id='mainTitle'>ZooOlogy</h1>
             {playButton}
-            <Link id='tutLink' to='/tutorial'>Tutorial</Link>
             {userSec}
         </div>
     )

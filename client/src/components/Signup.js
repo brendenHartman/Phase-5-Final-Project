@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { setEnclosures } from "../slices/enclosuresSlice";
 import { setAnimals } from "../slices/animalSlice";
 import { setCash } from "../slices/cashSlice";
+import { resetPro } from "../slices/progressSlice";
+import { setCompletes } from "../slices/completesSlice";
 
 function Signup(){
     const dispatch = useDispatch()
@@ -41,6 +43,7 @@ function Signup(){
             dispatch(setEnclosures(data.enclosures))
             dispatch(setAnimals(data.animals))
             dispatch(setCash(data.cash))
+            dispatch(setCompletes([]))
           }})
           .catch(error => console.log(error))
         },
