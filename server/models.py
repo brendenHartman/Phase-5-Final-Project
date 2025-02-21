@@ -7,16 +7,16 @@ from config import db
 class User(db.Model, SerializerMixin):
     __tablename__ =  'users'
 
-    serialize_rules =  ('-completes.user', '-animals.user', '-enclosures.user')
+    serialize_rules =  ('-completes.user', '-enclosures.user')
 
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String)
     password = db.Column(db.String)
     cash =  db.Column(db.Integer)
 
-    animals = db.relationship("Animal", back_populates = 'user')
     enclosures  = db.relationship("Enclosure", back_populates = 'user')
     completes = db.relationship("Complete", back_populates = "user")
+    achievements = db.relationship('Achievement', secondary='completes', viewonly=True)
 
     def  __repr__(self):
         return f'[User: {self.username}, pass: {self.password} cash: {self.cash}]'
@@ -28,7 +28,7 @@ class User(db.Model, SerializerMixin):
 class Animal(db.Model,SerializerMixin):
     __tablename__ = 'animals'
 
-    serialize_rules = ('-user.animals', '-enclosure.animals', '-user.enclosures')
+    serialize_rules = ('-enclosure.animals', '-user.enclosures')
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
@@ -36,9 +36,6 @@ class Animal(db.Model,SerializerMixin):
     purchased = db.Column(db.Boolean)
     price = db.Column(db.Integer)
     
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user = db.relationship('User', back_populates = 'animals')
-
     enclosure_id = db.Column(db.Integer, db.ForeignKey('enclosures.id'))
     enclosure  = db.relationship('Enclosure', back_populates = "animals")
 
@@ -51,7 +48,7 @@ class Animal(db.Model,SerializerMixin):
 class Enclosure(db.Model, SerializerMixin):
     __tablename__ = 'enclosures'
 
-    serialize_rules = ('-animals.enclosure', '-user.enclosures', '-user.animals')
+    serialize_rules = ('-animals.enclosure', '-user.enclosures')
 
     id = db.Column(db.Integer, primary_key = True)
     type = db.Column(db.String)
@@ -94,7 +91,7 @@ class Achievement(db.Model, SerializerMixin):
 class Complete(db.Model, SerializerMixin):
     __tablename__ = 'completes'
 
-    serialize_rules = ('-user.completes', '-achievement.completes', '-user.enclosures','-user.animals')
+    serialize_rules = ('-user.completes', '-achievement.completes', '-user.enclosures')
 
     id = db.Column(db.Integer, primary_key = True)
     claimed = db.Column(db.Boolean)

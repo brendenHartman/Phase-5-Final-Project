@@ -44,7 +44,7 @@ function Login(){
             history.push('/')
             dispatch(setUser(data))
             dispatch(setEnclosures(data.enclosures))
-            dispatch(setAnimals(data.animals))
+            dispatch(setAnimals(data.enclosures.animals))
             dispatch(setCash(data.cash))
           }})
           .catch(error => setErrorMessage(error.message))
@@ -58,10 +58,10 @@ function Login(){
           <form id='loginForm' onSubmit={formik.handleSubmit}>
               <label htmlFor='username'>Username:</label>
               <input id="username" className='logInput' onChange={formik.handleChange} value={formik.values.username} />
-              <p>{formik.errors.username}</p>
+              <p id='passErr'>{formik.errors.username}</p>
               <label htmlFor='password'>Password:</label>
               <input id="password" className='logInput' onChange={formik.handleChange} value={formik.values.password} />
-              <p>{formik.errors.password}</p>
+              <p id='userErr'>{formik.errors.password}</p>
               <input id="submit" type="submit" />
           </form>
           <p>Don't have an account already?</p>

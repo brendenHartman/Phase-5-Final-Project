@@ -60,10 +60,10 @@ function Signup(){
             <form id='SignUpForm' onSubmit={formikSign.handleSubmit}>
                 <label htmlFor='username'>Username:</label>
                 <input id="username" className='logInput' onChange={formikSign.handleChange} value={formikSign.values.username} />
-                <p>{formikSign.errors.username}</p>
+                <p id='passErr'>{formikSign.errors.username}</p>
                 <label htmlFor='password'>Password:</label>
                 <input id="password" className='logInput' onChange={formikSign.handleChange} value={formikSign.values.password} />
-                <p>{formikSign.errors.password}</p>
+                <p id='userErr'>{formikSign.errors.password}</p>
                 <input id="submit" type="submit" />
             </form>
             <p>Have An Acount Already?</p>

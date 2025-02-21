@@ -23,9 +23,14 @@ function App() {
       }
     })
     .then(data  => {if(data){
+      const enclosures = data.enclosures || [];
+
+      const animals = enclosures.reduce((acc, enclosure) => {
+        return acc.concat(enclosure.animals || []);
+      }, []);
       dispatch(setUser(data))
       dispatch(setEnclosures(data.enclosures))
-      dispatch(setAnimals(data.animals))
+      dispatch(setAnimals(animals))
       dispatch(setCash(data.cash))
       dispatch(setCompletes(data.completes))
     }})

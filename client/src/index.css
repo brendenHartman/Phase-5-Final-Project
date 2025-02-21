@@ -504,20 +504,17 @@ html{
 }
 
 #errorMsg{
-    background-color: rgb(221, 126, 126);
-    opacity: 50%;
-    color: black;
+    color: rgb(221, 126, 126);
     position: absolute;
     width: 20%;
     height: 200px;
-    top: 300px; 
-    right: 200px;
-    font-size: 26px;
+    top: 450px; 
+    align-self: center;
+    font-size: 18px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border: 3px solid black;
     border-radius: 5px;
 }
 
@@ -536,5 +533,43 @@ html{
     align-items: center;
     flex-direction: column;
     border: 3px solid black;
+    border-radius: 5px;
+}
+
+#username{
+    margin-bottom: 20px;
+}
+
+#password{
+    margin-bottom: 20px;
+}
+
+#passErr{
+    color: rgb(221, 126, 126);
+    position: absolute;
+    width: 10%;
+    height: 30px;
+    top: 355px; 
+    left: 675px;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 5px;
+}
+
+#userErr{
+    color: rgb(221, 126, 126);
+    position: absolute;
+    width: 10%;
+    height: 30px;
+    top: 410px; 
+    left: 675px;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     border-radius: 5px;
 }

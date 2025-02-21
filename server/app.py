@@ -75,7 +75,11 @@ class Login(Resource):
             session['user_id'] = user.id
             return user.to_dict(), 201
         else:
-            return {'error': 'username does not exist'}, 401
+            if request.get_json()['username'] == '':
+                return {'error': 'must enter username'}, 401
+            if request.get_json()['password'] == '':
+                return {'error': 'must enter password'}, 401
+            return {'error': 'username or password incorrect'}, 401
 
 class Enclosures(Resource):
     def get(self):
@@ -103,13 +107,13 @@ class Animals(Resource):
         userId = request.get_json()['userId']
         user  = User.query.filter_by(id=userId).first()
         animals = []
-        animal1 = Animal(name='',type=type,price=price,enclosure=enclosure,user=user,purchased=False)
+        animal1 = Animal(name='',type=type,price=price,enclosure=enclosure,purchased=False)
         animals.append(animal1)
-        animal2 = Animal(name='',type=type,price=price,enclosure=enclosure,user=user,purchased=False)
+        animal2 = Animal(name='',type=type,price=price,enclosure=enclosure,purchased=False)
         animals.append(animal2)
-        animal3 = Animal(name='',type=type,price=price,enclosure=enclosure,user=user,purchased=False)
+        animal3 = Animal(name='',type=type,price=price,enclosure=enclosure,purchased=False)
         animals.append(animal3)
-        animal4 = Animal(name='',type=type,price=price,enclosure=enclosure,user=user,purchased=False)
+        animal4 = Animal(name='',type=type,price=price,enclosure=enclosure,purchased=False)
         animals.append(animal4)
         db.session.add_all(animals)
         db.session.commit()
