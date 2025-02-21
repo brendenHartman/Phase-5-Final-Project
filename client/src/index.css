@@ -573,3 +573,34 @@ html{
     flex-direction: column;
     border-radius: 5px;
 }
+
+#myAchSec {
+    background-color: rgb(14, 14, 14);
+    border: 5px solid rgb(243, 171, 103);
+    display: flex;
+    align-items: center;
+    color: white;
+    position: fixed;
+    right: 50px;
+    top: 150px;
+    height: 600px;
+    width: 500px;
+    border-radius: 10px;
+    flex-direction: column;
+}
+
+#myAchHead{
+    text-decoration: underline;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.achLi{
+    color: rgb(243, 171, 103);
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top: 0;
+    text-decoration: line-through;
+}

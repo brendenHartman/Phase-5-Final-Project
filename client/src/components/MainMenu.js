@@ -12,7 +12,7 @@ function MainMenu(){
         <Link id='signUpLink' className='signUpLink' to='/signup'>Signup</Link>
     </div>)
 
-    let playButton = <Link className='playButt' to='/Login'>Play</Link>
+    let playButton = <Link className='playButt' to='/Zoo'>Play</Link>
 
     if('id' in user){
       userSec = (

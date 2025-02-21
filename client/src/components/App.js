@@ -16,6 +16,7 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    console.log('checking...')
     fetch('/check_session')
     .then(res => {
       if(res.ok){
@@ -34,7 +35,6 @@ function App() {
       dispatch(setCash(data.cash))
       dispatch(setCompletes(data.completes))
     }})
-    .catch()
     },[dispatch])
 
   return( 

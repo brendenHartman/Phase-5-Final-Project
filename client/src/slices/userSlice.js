@@ -14,9 +14,13 @@ const userSlice = createSlice({
         userCashSubtract(state,action){
             state.cash = state.cash - action.payload
             return state
+        },
+        setUserAch(state,action){
+            state.achievements = action.payload
+            return state
         }
     }
 })
 
-export const { setUser, userCashAdd, userCashSubtract } = userSlice.actions;
+export const { setUser, userCashAdd, userCashSubtract, setUserAch } = userSlice.actions;
 export default userSlice.reducer;

@@ -1,13 +1,21 @@
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Enclosure from "./Enclosure";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 function Zoo(){
-
+    const user = useSelector(state  => state.user)
     const enclosures = useSelector((state) => state.enclosures)
     const cash = useSelector((state) => state.cash)
     const [linksVisible, setLinksVisible] = useState(false);
+        console.log(user)
+        const isUserAuthenticated = user && user.cash;
+
+        if (!isUserAuthenticated) {
+            return <Redirect to="/login" />;
+        }
+    
 
     function handleMenu(event){
         setLinksVisible(!linksVisible);
